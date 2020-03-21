@@ -21,7 +21,7 @@ class complex
     {
         re = a;
         im = 0;
-        }
+    }
         
     double method()//method
     {
