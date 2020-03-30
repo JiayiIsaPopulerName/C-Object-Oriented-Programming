@@ -18,14 +18,16 @@ class Vec
         double max_norm();
         void print();
         const Vec operator+(const Vec &obj);
-        const Vec operator*(const Vec &obj)
+        const Vec operator*(double x)
         {
-            len=obj.len;
-            for(int i=0;i < obj.len;i++)
-                return *Vec(obj.len,*((v+i)*(obj.v+i));
+            Vec tmp(len);
+            for(int i=0;i < len;i++)
+                *(tmp.v+i) = *(v+i) * x;
+            return tmp;
         }
+        friend Vec operator*(double x, const Vec &y);
         Vec operator=(const Vec &obj);
-        double operator[](int x);
+        double &operator[](int x);
         friend ostream& operator<<(ostream &os,const Vec &obj);
 };
 
@@ -91,9 +93,18 @@ void Vec::print()
 }
 const Vec Vec::operator+(const Vec &obj) 
 {
+    double z[len];
     for(int i=0;i < len;i++)
-        return (obj.len,*(v+i)+obj.(v+i));
+        z[i] = *(v+i) + *(obj.v+i);
+    return Vec(obj.len,z);
 }
+Vec operator*(double x, const Vec &y)
+    {
+        double z[y.len];
+	    for (int i = 0; i < y.len; i++)
+		    z[i] = x * *(y.v+i);
+	    return Vec(y.len,z);
+    }
 Vec Vec::operator=(const Vec &obj)
 {
     len=obj.len;
@@ -102,9 +113,8 @@ Vec Vec::operator=(const Vec &obj)
         *(v+i)=*(obj.v+i);
         return *this;
 }
-double Vec::operator[](int x)
+double &Vec::operator[](int x)
 {
-
     return *(v+x);
 }
 ostream &operator<<(ostream& os,const Vec &obj)
@@ -130,8 +140,10 @@ int main(void)
 
         cout << "u = " << u << endl;
         cout << "v = " << v << endl;
-        w = u = u;
+        w = u;
         cout << "w = u = " << w << endl;
+        //u = 4.*u;
+     //   v = v*3;
         w = 4.*u + v*3;
         cout << "w = 4.*u + v*3 = " << w << endl;
         w[2] = 3;
