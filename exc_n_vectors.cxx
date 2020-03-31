@@ -18,7 +18,29 @@ class Vec
 		double max_norm();
 		void print();
 };
+class nexception
+{
+    private:
+        int i;
+    public:
+        nexception(int n);
+        nexception();
+        int get();
+        int set();
+        ~nexception(){}
+};
+nexception::nexception(int n)
+{
 
+}
+nexception::nexception()
+{
+
+}
+int nexception::get()
+{
+
+}
 Vec::Vec(int a,double *b)
 {
     len = a;
@@ -30,19 +52,19 @@ Vec::Vec(int a)
 {
     len = a;
     v = new double[len];  
- 	for(int i = 0; i < len; i++)//!
+ 	for(int i = 0; i < len; i++)
 		*(v+i) = 0;
 }
 Vec::Vec(const Vec &obj)
 {
     len = obj.len;
 	v = new double[obj.len];
-    for(int i = 0;i<len;i++) //!
+    for(int i = 0;i<len;i++) 
 	    *(v+i) = *(obj.v+i);
 }
 Vec::~Vec()
 {
-    delete [] v;            //!
+    delete [] v;            
 }
 void Vec::set(double arg,int coord)
 {

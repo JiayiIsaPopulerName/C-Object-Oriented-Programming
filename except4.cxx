@@ -7,57 +7,59 @@ using namespace std;
 
 class FileException
 {
-    char *filename;
-    string comment;
-    int err_code;
-    public:
-    FileException(const char *arg_file,const char *arg_conmment);
-    FileException(const FileException &other);
-    ~FileException();
-    char *GetFilename(){return filename;}
-    string GetComment(){return comment;}
-    int GetErrCode(){return err_code;}
     private:
-    static char*strdup(const char *arg);    
+        char *filename;
+        string comment;
+        int err_code;
+    public:
+        FileException(const char *arg_file,const char *arg_conmment);
+        FileException(const FileException &other);
+        ~FileException();
+    public:
+        char *GetFilename(){return filename;}
+        string GetComment(){return comment;}
+        int GetErrCode(){return err_code;}
+    private:
+        static char*strdup(const char *arg);    
 };
 
-FileException::FileException(const char *arg_file,const char *arg_comment)
-{
-    filename = strdup(arg_file);
-    comment = arg_comment;
-    err_code=errno;
-}
-FileException::FileException(const FileException & other)
-{
-    filename = strdup(other.filename);
-    comment = other.comment;
-    err_code=other.err_code;
-}
-FileException::~FileException()
-{
-    delete [] filename;
-}
-char* FileException::strdup(const char *arg)
-{
-    char* res =new char[strlen(arg)+1];
-    strcpy(res,arg);
-    return res;
-}
-int count_symbols(const char *file_name)
-{
-    int n = 0;
-    ifstream fin(file_name);//read; ofstream-write in file;
-
-    if (!fin.is_open())
-        throw FileException(file_name,"cant open file")
-    else
+    FileException::FileException(const char *arg_file,const char *arg_comment)
     {
-        while (fin.get()!=EOF)//fin.open,fin.close
-            n++;
+        filename = strdup(arg_file);
+        comment = arg_comment;
+        err_code=errno;
     }
-    fin.close();
-    return n;   
-}
+    FileException::FileException(const FileException & other)
+    {
+        filename = strdup(other.filename);
+        comment = other.comment;
+        err_code=other.err_code;
+    }
+    FileException::~FileException()
+    {
+        delete [] filename;
+    }
+    char* FileException::strdup(const char *arg)
+    {
+        char* res =new char[strlen(arg)+1];
+        strcpy(res,arg);
+        return res;
+    }
+    int count_symbols(const char *file_name)
+    {
+        int n = 0;
+        ifstream fin(file_name);//read; ofstream-write in file;
+
+        if (!fin.is_open())
+            throw FileException(file_name,"cant open file")
+        else
+        {
+            while (fin.get()!=EOF)//fin.open,fin.close
+                n++;
+        }
+        fin.close();
+        return n;   
+    }
 int main(int argc,char **argv)
 {
     int n;

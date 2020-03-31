@@ -49,7 +49,7 @@ class test : public event
     }
     void test::change_mark(bool new_mark) 
     {
-        //event::change_mark(new_mark);           //!
+        event::change_mark(new_mark);           //!
         mark =  new_mark;//subj.mark
     }
    /* void test::change_mark(int new_mark)
@@ -76,7 +76,7 @@ class exam : public event
     }
     void exam::change_mark(int new_mark2) 
     {
-        //event::change_mark(new_mark2);
+        event::change_mark(new_mark2);
         mark = new_mark2;
     }
    /* void exam::change_mark(bool new_mark)
