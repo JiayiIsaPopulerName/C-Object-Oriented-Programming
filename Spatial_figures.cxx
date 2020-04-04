@@ -4,27 +4,28 @@ using namespace std;
 class figure
 {
     protected:
-        int x,y,z;
+        double x,y,z;
     public:
-        figure(int coordx = 0,int coordy = 0,int coordz = 0):x(coordx),y(coordy),z(coordz){}
-        virtual ~figure(){}
-        virtual void move();
-        virtual void print();
-        virtual double volume();
-        virtual double square();
+        figure(double coordx = 0, double coordy = 0, double coordz = 0):x(coordx),y(coordy),z(coordz){}
+        ~figure(){}
+        //virtual void move() = 0;
+        virtual void print() = 0;
+        virtual double volume() = 0;
+        virtual double square() = 0;
 };
 class cube : public figure
 {
-    int l;
+    private:
+    double l;
     public:
-    cube(int coordx = 0,int coordy = 0,int coordz = 0,int length = 0) : figure(coordx,coordy,coordz),l(length){}
-    virtual void move(int new_x,int new_y,int new_z);
+    cube(double coordx = 0, double coordy = 0, double coordz = 0,double length = 0) : figure(coordx,coordy,coordz),l(length){}
+    virtual void move(double new_x,double new_y,double new_z);
     virtual void print();
     virtual double volume();
     virtual double square();
     virtual ~cube(){} 
 };
-    void cube::move(int new_x,int new_y,int new_z)
+    void cube::move(double new_x,double new_y,double new_z)
     {
         x=new_x;
         y=new_y;
@@ -45,16 +46,17 @@ class cube : public figure
 
 class sphere : public figure
 {
-    int r;
+    private:
+    double r;
     public:
-    sphere(int coordx = 0,int coordy = 0,int coordz = 0,int radi = 0):figure(coordx,coordy,coordz),r(radi){}
-    virtual void move(int new_x,int new_y,int new_z);
+    sphere(double coordx = 0, double coordy = 0, double coordz = 0,double radi = 0):figure(coordx,coordy,coordz),r(radi){}
+    virtual void move(double new_x,double new_y,double new_z);
     virtual void print();
     virtual double volume();
     virtual double square();
     virtual ~sphere(){}
 };
-    void sphere::move(int new_x,int new_y,int new_z)
+    void sphere::move(double new_x,double new_y,double new_z)
     {
         x=new_x;
         y=new_y;
@@ -74,16 +76,17 @@ class sphere : public figure
     }
 class cylinder : public figure
 {
-    int r,h;
+    private:
+    double r,h;
     public:
-    cylinder(int coordx = 0,int coordy = 0,int coordz = 0,int radi = 0,int hight = 0) : figure(coordx,coordy,coordz),r(radi),h(hight){}
-    virtual void move(int new_x,int new_y,int new_z);
+    cylinder(double coordx = 0,double coordy = 0,double coordz = 0,double radi = 0,double hight = 0) : figure(coordx,coordy,coordz),r(radi),h(hight){}
+    virtual void move(double new_x,double new_y,double new_z);
     virtual void print();
     virtual double volume();
     virtual double square();
     virtual ~cylinder(){}
 };
-    void cylinder::move(int new_x,int new_y,int new_z)
+    void cylinder::move(double new_x,double new_y,double new_z)
     {
         x=new_x;
         y=new_y;
@@ -109,11 +112,23 @@ int main()
     cylinder cylinde(0,2,7,3,4);
 
     cub.print();
+    cout << "cube volume= " << cub.volume() << endl;
     spher.print();
+    cout << "sphere square= " << spher.square() << endl;
     cylinde.print();
+    cout << "cylinder square= " << cylinde.square() << endl;
+
+    cout << endl;
 
     cub.move(3,4,5);
+    spher.move(2,6,9);
+    cylinde.move(0,4,1);
 
-
+    cub.print();
+    cout << "cube volume= " << cub.volume() << endl;
+    spher.print();
+    cout << "sphere square= " << spher.square() << endl;
+    cylinde.print();
+    cout << "cylinder square= " << cylinde.square() << endl;
     return 0;
 }
